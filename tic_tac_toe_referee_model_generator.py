@@ -20,7 +20,7 @@ class TicTacToeReferee(object):
             tf.keras.layers.Input(shape=(self.input_size)),
             tf.keras.layers.Dense(self.hidden_size, activation='relu'),
             tf.keras.layers.Dense(self.hidden_size, activation='relu'),
-            tf.keras.layers.Dense(self.output_size, activation='relu'),
+            tf.keras.layers.Dense(self.output_size, activation='sigmoid'),
             ])
         self.output_keys = output_keys
         self.data_dict = None
@@ -80,7 +80,7 @@ def main() -> int:
         model = keras.models.load_model(pa.load_file)
         in_tensor = tf.constant([pa.input_board], dtype=float)
         print(in_tensor)
-        output = model.predict(in_tensor)
+        output = model(in_tensor)
         print(output)
     return 0
 
